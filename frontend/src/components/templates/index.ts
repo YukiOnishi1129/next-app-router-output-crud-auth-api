@@ -1,3 +1,5 @@
+export * from "./LoginTemplate";
+
 export * from "./TodoCreateTemplate";
 export * from "./TodoDetailTemplate";
 export * from "./TodoEditTemplate";

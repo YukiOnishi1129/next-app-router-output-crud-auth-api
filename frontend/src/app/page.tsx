@@ -1,14 +1,5 @@
-import { TodoListTemplate } from "@/components/templates";
-import { getTodoList } from "@/actions/todoApi";
+import { LoginTemplate } from "@/components/templates";
 
-export default async function TodoListPage() {
-  const res = await getTodoList();
-  if (!res?.data) {
-    return (
-      <div>
-        {res.errorCode}: {res.errorMessage}
-      </div>
-    );
-  }
-  return <TodoListTemplate data={res.data.todos} />;
+export default async function LoginPage() {
+  return <LoginTemplate />;
 }
