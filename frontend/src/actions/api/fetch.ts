@@ -1,8 +1,9 @@
 "use server";
 
 import { getAuthCookie } from "@/actions/cookie";
+import { BASE_GO_API_URL } from "@/constants/api";
 
-const BASE_URL = "http://localhost:4000/api/v1";
+const BASE_URL = BASE_GO_API_URL;
 
 type GetFetchArgs = {
   path: string;

@@ -6,6 +6,7 @@ import { deleteAuthCookie } from "@/actions/cookie";
 
 import { AuthType } from "@/types/user";
 import { ResponseType, IErrorResponse } from "@/types/ApiResponse";
+import { postFetch } from "./fetch";
 
 export const login = async (email: string, password: string) => {
   try {
@@ -20,7 +21,6 @@ export const login = async (email: string, password: string) => {
     const data = await response.json();
     const status = response.status;
     if (status === StatusCodes.OK) {
-      // await setAuthCookie(data.token);
       const res: ResponseType<AuthType> = {
         status: status,
         data: data,
@@ -50,19 +50,16 @@ export const login = async (email: string, password: string) => {
 export const checkAuth = async () => {
   const body: Record<string, unknown> = {};
   try {
-    const response = await fetch("http://localhost:3000/api/auth/check", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
+    const response = await postFetch({
+      path: "auth/authentication",
+      body,
     });
 
     const data = await response.json();
     const status = response.status;
     if (status === StatusCodes.OK) {
       const res: ResponseType<AuthType> = {
-        status: status,
+        status: StatusCodes.OK,
         data: data,
       };
       return res;

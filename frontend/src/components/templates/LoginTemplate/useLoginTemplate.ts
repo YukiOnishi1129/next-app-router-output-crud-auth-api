@@ -42,8 +42,6 @@ export const useLoginTemplate = () => {
         const { email, password } = values;
         const res = await login(email, password);
         if (res.status !== 200) {
-          console.log("❤️‍🔥:login");
-          console.log(res);
           setError("email", {
             type: "manual",
             message: res.errorMessage,
