@@ -117,7 +117,7 @@ cd frontend
 
 npm run dev
 
-url: http://localhost:5173
+url: http://localhost:3000
 ```
 
 - 以下を入力してログイン
@@ -139,7 +139,7 @@ password: password
 ```
 DBMS: Postgres
 host: 127.0.0.1
-database: REACT_OUTPUT_CRUD_AUTH_API_DB
+database: NEXT_APP_ROUTER_OUTPUT_CRUD_AUTH_API_DB
 user: user
 password: pass
 port: 5432
@@ -169,7 +169,7 @@ docker ps
 
 各イメージに対応する コンテナ ID を確認
 
-- バックエンド: react-output-crud-auth-api-backend
+- バックエンド: next-app-router-output-crud-auth-api-backend
 - DB: postgres:17.2
 
 以下のコマンドで各コンテナのログを確認
