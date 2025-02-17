@@ -1,5 +1,5 @@
 import { TodoDetailTemplate } from "@/components/templates";
-import { getTodo } from "@/actions/todoApi";
+import { getTodo } from "@/actions/api/todoApi";
 
 type TodoDetailPageProps = {
   params: Promise<{ id: string }>;

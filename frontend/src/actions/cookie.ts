@@ -4,12 +4,13 @@ import { cookies } from "next/headers";
 import { AUTH_COOKIE_KEY } from "@/constants/auth";
 
 const setCookie = async (key: string, value: string) => {
-  const cookie = await cookies();
-  cookie.set(key, value, {
+  const cookieStore = await cookies();
+  cookieStore.set({
+    name: key,
+    value: value,
     httpOnly: true,
     secure: true,
-    path: "/",
-    maxAge: 60 * 60 * 24,
+    expires: 60 * 60 * 24,
   });
 };
 

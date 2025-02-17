@@ -1,7 +1,12 @@
 "use server";
 import { StatusCodes } from "http-status-codes";
 
-import { getFetch, postFetch, putFetch, deleteFetch } from "@/actions/fetch";
+import {
+  getFetch,
+  postFetch,
+  putFetch,
+  deleteFetch,
+} from "@/actions/api/fetch";
 import {
   TodoListResponseType,
   TodoType,

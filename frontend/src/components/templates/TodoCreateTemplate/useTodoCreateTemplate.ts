@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createTodo } from "@/actions/todoApi";
+import { createTodo } from "@/actions/api/todoApi";
 import { NAVIGATION_PATH } from "@/constants/navigation";
 
 const schema = z.object({

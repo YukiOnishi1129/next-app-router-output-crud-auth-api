@@ -9,7 +9,7 @@ import { StatusCodes } from "http-status-codes";
 import { InputFormSection } from "@/components/molecules";
 import { BaseLayout, TodoList } from "@/components/organisms";
 import { TodoType } from "@/types/todo";
-import { deleteTodo } from "@/actions/todoApi";
+import { deleteTodo } from "@/actions/api/todoApi";
 import styles from "./style.module.css";
 
 const schema = z.object({

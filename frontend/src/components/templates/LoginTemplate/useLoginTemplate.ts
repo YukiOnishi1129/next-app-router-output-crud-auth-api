@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { login } from "@/actions/authApi";
+import { login } from "@/actions/api/authApi";
 import { NAVIGATION_LIST } from "@/constants/navigation";
 
 const schema = z.object({
@@ -42,7 +42,7 @@ export const useLoginTemplate = () => {
         const { email, password } = values;
         const res = await login(email, password);
         if (res.status !== 200) {
-          console.log("❤️‍🔥");
+          console.log("❤️‍🔥:login");
           console.log(res);
           setError("email", {
             type: "manual",
