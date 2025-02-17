@@ -15,10 +15,6 @@ export const login = async (email: string, password: string) => {
       body: { email, password },
     });
 
-    if (!response.ok) {
-      throw new Error("Login failed");
-    }
-
     const data = await response.json();
     const status = response.status;
     if (status === StatusCodes.OK) {
@@ -37,6 +33,7 @@ export const login = async (email: string, password: string) => {
     };
     return res;
   } catch (error) {
+    console.log(error);
     const res: ResponseType = {
       status: StatusCodes.INTERNAL_SERVER_ERROR,
       errorCode: `${StatusCodes.INTERNAL_SERVER_ERROR}`,
