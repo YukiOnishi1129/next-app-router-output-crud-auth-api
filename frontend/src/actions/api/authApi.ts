@@ -2,7 +2,7 @@
 
 import { StatusCodes } from "http-status-codes";
 
-import { deleteAuthCookie } from "@/actions/cookie";
+import { signOut } from "@/auth/auth";
 
 import { AuthType } from "@/types/user";
 import { ResponseType, IErrorResponse } from "@/types/ApiResponse";
@@ -10,12 +10,12 @@ import { postFetch } from "./fetch";
 
 export const login = async (email: string, password: string) => {
   try {
-    const response = await fetch("http://localhost:3000/api/auth/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await postFetch({
+      path: "auth/login",
+      body: {
+        email,
+        password,
       },
-      body: JSON.stringify({ email, password }),
     });
 
     const data = await response.json();
@@ -85,5 +85,5 @@ export const checkAuth = async () => {
 };
 
 export const logout = async () => {
-  await deleteAuthCookie();
+  await signOut();
 };

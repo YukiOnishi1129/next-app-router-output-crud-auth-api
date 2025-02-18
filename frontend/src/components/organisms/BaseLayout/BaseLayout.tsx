@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 
-import { Navigation } from "@/components/molecules/Navigation";
+import { Navigation } from "../../molecules/Navigation";
 import styles from "./style.module.css";
 
 type BaseLayoutProps = {
@@ -9,11 +9,13 @@ type BaseLayoutProps = {
 };
 
 export const BaseLayout: FC<BaseLayoutProps> = ({ children, title }) => (
-  <div className={styles.container}>
-    <section className={styles.common}>
+  <div>
+    <header className={styles.header}>
       <Navigation />
-    </section>
-    <h1 className={styles.title}>{title}</h1>
-    {children}
+    </header>
+    <main className={styles.container}>
+      <h1 className={styles.title}>{title}</h1>
+      {children}
+    </main>
   </div>
 );

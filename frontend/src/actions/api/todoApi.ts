@@ -1,6 +1,5 @@
 "use server";
 import { StatusCodes } from "http-status-codes";
-
 import {
   getFetch,
   postFetch,
@@ -20,7 +19,7 @@ import { ResponseType, IErrorResponse } from "@/types/ApiResponse";
 export const getTodoList = async () => {
   try {
     const response = await getFetch({
-      path: "todos",
+      path: `todos`,
       tagName: "getTodoList",
     });
     const data = await response.json();
@@ -52,7 +51,7 @@ export const getTodo = async (req: GetTodoRequest) => {
   try {
     const response = await getFetch({
       path: `todos/${req.id}`,
-      tagName: "getTodoList",
+      tagName: "getTodo",
     });
     const data = await response.json();
     const status = response.status;

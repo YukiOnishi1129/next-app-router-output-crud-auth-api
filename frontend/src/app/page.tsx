@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
 import { LoginTemplate } from "@/components/templates";
-import { isCheckAuth } from "@/actions/auth";
 import { NAVIGATION_LIST } from "@/constants/navigation";
+import { auth } from "@/auth/auth";
 
 export default async function LoginPage() {
-  const auth = await isCheckAuth();
-  if (auth) {
+  const session = await auth();
+  if (session?.user) {
     redirect(NAVIGATION_LIST.TOP);
   }
   return <LoginTemplate />;

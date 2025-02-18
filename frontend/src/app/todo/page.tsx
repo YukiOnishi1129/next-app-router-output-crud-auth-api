@@ -1,15 +1,16 @@
 import { redirect } from "next/navigation";
 import { TodoListTemplate } from "@/components/templates";
 import { getTodoList } from "@/actions/api/todoApi";
-import { isCheckAuth } from "@/actions/auth";
 import { NAVIGATION_LIST } from "@/constants/navigation";
 
+import { auth } from "@/auth/auth";
+
 export default async function TodoListPage() {
-  const res = await getTodoList();
-  const auth = await isCheckAuth();
-  if (!auth) {
+  const session = await auth();
+  if (!session?.user) {
     redirect(NAVIGATION_LIST.LOGIN);
   }
+  const res = await getTodoList();
   if (!res?.data) {
     return (
       <div>
