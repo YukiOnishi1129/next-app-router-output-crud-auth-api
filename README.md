@@ -5,9 +5,10 @@
 ### フロントエンド
 
 - typescript: 5.0.0
+- next: 15.1.7
 - react: 19.0.0
 - react-dom: 19.0.0
-- react-route: 7.1.5
+- next-auth: 5.0.0-beta.25
 - react-hook-form: 7.54.2
 - zod: 3.24.2
 - @hookform/resolvers: 4.0.0
