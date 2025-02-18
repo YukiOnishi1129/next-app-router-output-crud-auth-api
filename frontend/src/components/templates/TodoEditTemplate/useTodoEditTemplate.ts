@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { updateTodo } from "@/actions/todoApi";
+import { updateTodo } from "@/actions/api/todoApi";
 import { NAVIGATION_PATH } from "@/constants/navigation";
 import { TodoType } from "@/types/todo";
 
