@@ -26,6 +26,13 @@ export const signIn = async (email: string, password: string) => {
               message: "メールアドレスまたはパスワードが間違っています。",
             },
           };
+        case "CallbackRouteError":
+          return {
+            isSuccess: false,
+            error: {
+              message: error.cause?.err?.message,
+            },
+          };
         default:
           return {
             isSuccess: false,
