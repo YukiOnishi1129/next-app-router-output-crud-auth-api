@@ -110,6 +110,19 @@ make seed
 touch frontend/.env
 ```
 
+- auth.js の key を作成して環境変数に適用
+
+```
+# auth.js の keyの生成コマンド
+openssl rand -base64 32
+
+
+.envのNEXTAUTH_SECRETに記載
+NEXTAUTH_SECRET=xxxx
+※これを設定しないとフロントエンドの認証系が動かない
+
+```
+
 - フロントエンドのアプリを起動
 
 ```

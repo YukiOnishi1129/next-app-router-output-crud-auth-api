@@ -7,6 +7,7 @@ type InputFormProps = ComponentProps<"input">;
 
 export const InputForm: FC<InputFormProps> = ({
   disabled = false,
+  type = "text",
   value,
   placeholder,
   onChange,
@@ -15,7 +16,7 @@ export const InputForm: FC<InputFormProps> = ({
   <input
     disabled={disabled}
     className={styles.input}
-    type="text"
+    type={type}
     placeholder={placeholder}
     value={value}
     onChange={onChange}
