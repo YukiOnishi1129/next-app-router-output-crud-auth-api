@@ -4,18 +4,16 @@ import { StatusCodes } from "http-status-codes";
 
 import { signOut } from "@/config/auth";
 
-import { AuthType } from "@/types/user";
+import { AuthType, LoginRequest, SignUpRequest } from "@/types/user";
 import { ResponseType, IErrorResponse } from "@/types/ApiResponse";
 import { postFetch } from "./fetch";
 
-export const login = async (email: string, password: string) => {
+export const login = async (req: LoginRequest) => {
   try {
+    console.log(req);
     const response = await postFetch({
       path: "auth/login",
-      body: {
-        email,
-        password,
-      },
+      body: req,
     });
 
     const data = await response.json();
@@ -47,19 +45,11 @@ export const login = async (email: string, password: string) => {
   }
 };
 
-export const register = async (
-  name: string,
-  email: string,
-  password: string
-) => {
+export const register = async (req: SignUpRequest) => {
   try {
     const response = await postFetch({
       path: "auth/signup",
-      body: {
-        name,
-        email,
-        password,
-      },
+      body: req,
     });
 
     const data = await response.json();

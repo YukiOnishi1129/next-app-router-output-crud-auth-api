@@ -43,10 +43,17 @@ export const options: NextAuthConfig = {
 
         if (!inputName || inputName === "") {
           // ログイン処理
-          res = await login(inputEmail, inputPassword);
+          res = await login({
+            email: inputEmail,
+            password: inputPassword,
+          });
         } else {
           // 新規登録処理
-          res = await register(inputName, inputEmail, inputPassword);
+          res = await register({
+            name: inputName,
+            email: inputEmail,
+            password: inputPassword,
+          });
         }
 
         if (
