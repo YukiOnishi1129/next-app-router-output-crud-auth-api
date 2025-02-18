@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@/auth/auth";
+import { getSession } from "@/actions/auth";
 import { BASE_GO_API_URL } from "@/constants/api";
 
 const BASE_URL = BASE_GO_API_URL;
@@ -13,7 +13,7 @@ type GetFetchArgs = {
 };
 
 export const getFetch = async ({ path, tagName, cacheType }: GetFetchArgs) => {
-  const session = await auth();
+  const session = await getSession();
   return fetch(`${BASE_URL}/${path}`, {
     headers: new Headers({
       "Content-Type": "application/json",
@@ -30,7 +30,7 @@ type PostFetchArgs = {
 };
 
 export const postFetch = async ({ path, body }: PostFetchArgs) => {
-  const session = await auth();
+  const session = await getSession();
   return fetch(`${BASE_URL}/${path}`, {
     method: "POST",
     headers: new Headers({
@@ -47,7 +47,7 @@ type PutFetchArgs = {
 };
 
 export const putFetch = async ({ path, body }: PutFetchArgs) => {
-  const session = await auth();
+  const session = await getSession();
   return fetch(`${BASE_URL}/${path}`, {
     method: "PUT",
     headers: new Headers({
@@ -63,7 +63,7 @@ type DeleteFetchArgs = {
 };
 
 export const deleteFetch = async ({ path }: DeleteFetchArgs) => {
-  const session = await auth();
+  const session = await getSession();
   return fetch(`${BASE_URL}/${path}`, {
     method: "DELETE",
     headers: new Headers({

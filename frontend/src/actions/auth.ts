@@ -2,7 +2,9 @@
 
 import { AuthError } from "next-auth";
 
-import { signIn as NextAuthSignIn } from "@/auth/auth";
+import { signIn as NextAuthSignIn, auth as NextAuth } from "@/config/auth";
+
+export const getSession = async () => await NextAuth();
 
 export const signIn = async (email: string, password: string) => {
   try {
