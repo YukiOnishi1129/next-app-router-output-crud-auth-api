@@ -1,13 +1,21 @@
 import { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { StatusCodes } from "http-status-codes";
 
 import { ExtendedUser } from "@/next-auth";
-import { login } from "@/actions/api/authApi";
+import { login, register } from "@/actions/api/authApi";
+
+import { ResponseType } from "@/types/ApiResponse";
+import { AuthType } from "@/types/user";
 
 export const options: NextAuthConfig = {
   providers: [
     Credentials({
       credentials: {
+        name: {
+          label: "Name",
+          type: "text",
+        },
         email: {
           label: "Email",
           type: "email",
@@ -17,12 +25,34 @@ export const options: NextAuthConfig = {
           type: "password",
         },
       },
-      authorize: async ({ email, password }) => {
+      authorize: async ({ name, email, password }) => {
+        const inputName = name as string;
         const inputEmail = email as string;
         const inputPassword = password as string;
 
-        const res = await login(inputEmail, inputPassword);
-        if (res.status !== 200) {
+        const user: ExtendedUser = {
+          id: "",
+          name: "",
+          email: "",
+          createdAt: "",
+          updatedAt: "",
+          token: "",
+        };
+
+        let res: ResponseType<AuthType> | ResponseType<undefined>;
+
+        if (!inputName || inputName === "") {
+          // ログイン処理
+          res = await login(inputEmail, inputPassword);
+        } else {
+          // 新規登録処理
+          res = await register(inputName, inputEmail, inputPassword);
+        }
+
+        if (
+          res.status !== StatusCodes.OK &&
+          res.status !== StatusCodes.CREATED
+        ) {
           throw new Error(res.errorMessage);
         }
         if (!res?.data) {
@@ -33,14 +63,14 @@ export const options: NextAuthConfig = {
           throw new Error("Token is not found");
         }
 
-        return {
-          id: res.data.user.id,
-          name: res.data.user.name,
-          email: res.data.user.email,
-          createdAt: res.data.user.createdAt,
-          updatedAt: res.data.user.updatedAt,
-          token: res.data.token,
-        } as ExtendedUser;
+        user.id = res.data.user.id;
+        user.name = res.data.user.name;
+        user.email = res.data.user.email;
+        user.createdAt = res.data.user.createdAt;
+        user.updatedAt = res.data.user.updatedAt;
+        user.token = res.data.token;
+
+        return user;
       },
     }),
   ],

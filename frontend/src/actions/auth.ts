@@ -36,18 +36,47 @@ export const signIn = async (email: string, password: string) => {
             },
           };
         default:
-          return {
-            isSuccess: false,
-            error: {
-              message: "ログインに失敗しました。",
-            },
-          };
       }
     }
     return {
       isSuccess: false,
       error: {
         message: "ログインに失敗しました。",
+      },
+    };
+  }
+};
+
+export const signUp = async (name: string, email: string, password: string) => {
+  try {
+    await NextAuthSignIn("credentials", {
+      name,
+      email,
+      password,
+      redirect: false,
+    });
+
+    return {
+      isSuccess: true,
+      message: "会員登録に成功しました。",
+    };
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CallbackRouteError":
+          return {
+            isSuccess: false,
+            error: {
+              message: error.cause?.err?.message,
+            },
+          };
+        default:
+      }
+    }
+    return {
+      isSuccess: false,
+      error: {
+        message: "会員登録に失敗しました。",
       },
     };
   }
